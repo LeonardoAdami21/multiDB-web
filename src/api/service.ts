@@ -54,16 +54,16 @@ export const databaseApi = {
 
 export const schemaApi = {
   list: (dbId: string) =>
-    api.get(`/database/${dbId}/schemas`).then(unwrap<DbSchema[]>),
+    api.get(`/database/${dbId}/schema`).then(unwrap<DbSchema[]>),
   create: (dbId: string, definition: SchemaDefinition) =>
-    api.post(`/database/${dbId}/schemas`, definition).then(unwrap<DbSchema>),
+    api.post(`/database/${dbId}/schema`, definition).then(unwrap<DbSchema>),
   apply: (dbId: string, schemaId: string) =>
     api
-      .post(`/database/${dbId}/schemas/${schemaId}/apply`)
+      .post(`/database/${dbId}/schema/${schemaId}/apply`)
       .then(unwrap<{ success: boolean; version: number }>),
   rollback: (dbId: string, version: number) =>
     api
-      .post(`/database/${dbId}/schemas/rollback/${version}`)
+      .post(`/database/${dbId}/schema/rollback/${version}`)
       .then(unwrap<{ success: boolean }>),
 };
 

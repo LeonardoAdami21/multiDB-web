@@ -16,7 +16,7 @@ const SdkPage = () => {
   const [loading, setLoading] = useState(false);
 
   const { data: databases } = useQuery({
-    queryKey: ["databases"],
+    queryKey: ["database"],
     queryFn: databaseApi.list,
   });
 
