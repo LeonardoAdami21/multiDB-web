@@ -71,7 +71,7 @@ const TABS = [
 const inputCls =
   "w-full px-2 py-1 rounded text-xs font-mono bg-elevated border border-border text-primary outline-none focus:border-accent transition-colors";
 
-export function DatabaseDetailPage() {
+const DatabaseDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const qc = useQueryClient();
@@ -170,7 +170,7 @@ export function DatabaseDetailPage() {
           <Button
             variant="ghost"
             icon={<ArrowLeft size={13} />}
-            onClick={() => navigate("/databases")}
+            onClick={() => navigate("/database")}
           >
             Voltar
           </Button>
@@ -578,4 +578,6 @@ X-API-Key: sk_live_xxxx`}
       )}
     </div>
   );
-}
+};
+
+export default DatabaseDetailPage;

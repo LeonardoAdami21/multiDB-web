@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { Plus, Database, Trash2, ChevronRight, RefreshCw } from "lucide-react";
@@ -24,7 +24,7 @@ const ENGINE_OPTIONS = [
   { value: "SQLITE", label: "SQLite", desc: "Leve e embutido" },
 ];
 
-const DatabasePage = () => {
+const DatabasePage: React.FC = () => {
   const qc = useQueryClient();
   const navigate = useNavigate();
   const [showCreate, setShowCreate] = useState(false);
@@ -32,7 +32,7 @@ const DatabasePage = () => {
   const [engine, setEngine] = useState("POSTGRESQL");
 
   const { data: databases, isLoading } = useQuery({
-    queryKey: ["databases"],
+    queryKey: ["database"],
     queryFn: databaseApi.list,
     refetchInterval: 5000,
   });
@@ -40,7 +40,7 @@ const DatabasePage = () => {
   const createMutation = useMutation({
     mutationFn: () => databaseApi.create({ name, engine }),
     onSuccess: () => {
-      qc.invalidateQueries({ queryKey: ["databases"] });
+      qc.invalidateQueries({ queryKey: ["database"] });
       toast.success("Provisionando...");
       setShowCreate(false);
       setName("");
@@ -51,7 +51,7 @@ const DatabasePage = () => {
   const deleteMutation = useMutation({
     mutationFn: databaseApi.delete,
     onSuccess: () => {
-      qc.invalidateQueries({ queryKey: ["databases"] });
+      qc.invalidateQueries({ queryKey: ["database"] });
       toast.success("Database deletado");
     },
     onError: (e) => toast.error(getErrorMessage(e)),
@@ -68,7 +68,7 @@ const DatabasePage = () => {
             icon={<Plus size={13} />}
             onClick={() => setShowCreate(true)}
           >
-            Novo Database
+            Novo Banco de Dados
           </Button>
         }
       />
@@ -178,7 +178,7 @@ const DatabasePage = () => {
             <DatabaseRow
               key={db.id}
               db={db}
-              onView={() => navigate(`/databases/${db.id}`)}
+              onView={() => navigate(`/database/${db.id}`)}
               onDelete={() => {
                 if (confirm(`Deletar "${db.name}"?`))
                   deleteMutation.mutate(db.id);
