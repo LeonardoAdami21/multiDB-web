@@ -1,11 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import {
-  Database,
-  HardDrive,
-  Activity,
-  AlertTriangle,
-  Zap,
-} from "lucide-react";
+import { Database, HardDrive, Activity, AlertTriangle } from "lucide-react";
 import { metricsApi, billingApi, tenantApi } from "../api/service";
 import { Card, StatCard, Progress, Badge, Spinner } from "../components/ui";
 import {
