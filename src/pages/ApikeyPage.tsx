@@ -29,7 +29,7 @@ const ApiKeyPage = () => {
   const [showCreate, setShowCreate] = useState(false);
   const [name, setName] = useState("");
   const [scopes, setScopes] = useState<string[]>(["db:read", "db:write"]);
-  const [expiresAt, setExpiresAt] = useState("");
+  const [expiresAt, setExpiresAt] = useState<Date>(new Date()); // Date | null>
   const [newKey, setNewKey] = useState<string | null>(null);
   const [showKey, setShowKey] = useState(false);
 
@@ -47,7 +47,7 @@ const ApiKeyPage = () => {
       setShowCreate(false);
       setName("");
       setScopes(["db:read", "db:write"]);
-      setExpiresAt("");
+      setExpiresAt(new Date());
     },
     onError: (e) => toast.error(getErrorMessage(e)),
   });
@@ -171,7 +171,7 @@ const ApiKeyPage = () => {
               <input
                 type="date"
                 value={expiresAt}
-                onChange={(e) => setExpiresAt(e.target.value)}
+                onChange={(e) => setExpiresAt(new Date(e.target.value))}
                 className="px-3 py-2 rounded-md bg-elevated border border-border text-primary text-sm font-mono outline-none focus:border-accent transition-colors"
               />
             </div>

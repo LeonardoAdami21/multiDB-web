@@ -125,7 +125,7 @@ export function DashboardPage() {
                 usage.usage.databases.used,
                 usage.usage.databases.limit,
               )}
-              label="Databases"
+              label="Database"
             />
           </div>
         </Card>

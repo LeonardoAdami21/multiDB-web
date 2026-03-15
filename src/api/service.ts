@@ -32,38 +32,38 @@ export const authApi = {
 // ─── Tenant ────────────────────────────────────────────────
 
 export const tenantApi = {
-  me: () => api.get("/tenants/me").then(unwrap<Tenant>),
+  me: () => api.get("/tenant/me").then(unwrap<Tenant>),
   update: (data: { name?: string }) =>
-    api.patch("/tenants/me", data).then(unwrap<Tenant>),
-  alerts: () => api.get("/tenants/me/alerts").then(unwrap<Alert[]>),
+    api.patch("/tenant/me", data).then(unwrap<Tenant>),
+  alerts: () => api.get("/tenant/me/alerts").then(unwrap<Alert[]>),
   resolveAlert: (id: string) =>
-    api.patch(`/tenants/me/alerts/${id}/resolve`).then(unwrap<void>),
+    api.patch(`/tenant/me/alerts/${id}/resolve`).then(unwrap<void>),
 };
 
 // ─── Databases ─────────────────────────────────────────────
 
 export const databaseApi = {
-  list: () => api.get("/databases").then(unwrap<Database[]>),
-  get: (id: string) => api.get(`/databases/${id}`).then(unwrap<Database>),
+  list: () => api.get("/database").then(unwrap<Database[]>),
+  get: (id: string) => api.get(`/database/${id}`).then(unwrap<Database>),
   create: (data: { name: string; engine: string }) =>
-    api.post("/databases", data).then(unwrap<Database>),
-  delete: (id: string) => api.delete(`/databases/${id}`).then(unwrap<Database>),
+    api.post("/database", data).then(unwrap<Database>),
+  delete: (id: string) => api.delete(`/database/${id}`).then(unwrap<Database>),
 };
 
 // ─── Schemas ───────────────────────────────────────────────
 
 export const schemaApi = {
   list: (dbId: string) =>
-    api.get(`/databases/${dbId}/schemas`).then(unwrap<DbSchema[]>),
+    api.get(`/database/${dbId}/schemas`).then(unwrap<DbSchema[]>),
   create: (dbId: string, definition: SchemaDefinition) =>
-    api.post(`/databases/${dbId}/schemas`, definition).then(unwrap<DbSchema>),
+    api.post(`/database/${dbId}/schemas`, definition).then(unwrap<DbSchema>),
   apply: (dbId: string, schemaId: string) =>
     api
-      .post(`/databases/${dbId}/schemas/${schemaId}/apply`)
+      .post(`/database/${dbId}/schemas/${schemaId}/apply`)
       .then(unwrap<{ success: boolean; version: number }>),
   rollback: (dbId: string, version: number) =>
     api
-      .post(`/databases/${dbId}/schemas/rollback/${version}`)
+      .post(`/database/${dbId}/schemas/rollback/${version}`)
       .then(unwrap<{ success: boolean }>),
 };
 
@@ -71,7 +71,7 @@ export const schemaApi = {
 
 export const apiKeyApi = {
   list: () => api.get("/auth/api-keys").then(unwrap<ApiKey[]>),
-  create: (data: { name: string; scopes: string[]; expiresAt?: string }) =>
+  create: (data: { name: string; scopes: string[]; expiresAt?: Date }) =>
     api.post("/auth/api-keys", data).then(unwrap<ApiKey>),
   revoke: (id: string) =>
     api.delete(`/auth/api-keys/${id}`).then(unwrap<ApiKey>),
@@ -80,28 +80,28 @@ export const apiKeyApi = {
 // ─── Webhooks ──────────────────────────────────────────────
 
 export const webhookApi = {
-  list: () => api.get("/webhooks").then(unwrap<Webhook[]>),
+  list: () => api.get("/webhook").then(unwrap<Webhook[]>),
   create: (data: {
     name: string;
     url: string;
     events: string[];
     models: string[];
-  }) => api.post("/webhooks", data).then(unwrap<Webhook>),
-  delete: (id: string) => api.delete(`/webhooks/${id}`).then(unwrap<void>),
+  }) => api.post("/webhook", data).then(unwrap<Webhook>),
+  delete: (id: string) => api.delete(`/webhook/${id}`).then(unwrap<void>),
   deliveries: (id: string) =>
-    api.get(`/webhooks/${id}/deliveries`).then(unwrap<WebhookDelivery[]>),
+    api.get(`/webhook/${id}/deliveries`).then(unwrap<WebhookDelivery[]>),
 };
 
 // ─── Backups ───────────────────────────────────────────────
 
 export const backupApi = {
   list: (dbId: string) =>
-    api.get(`/databases/${dbId}/backups`).then(unwrap<Backup[]>),
+    api.get(`/database/${dbId}/backup`).then(unwrap<Backup[]>),
   create: (dbId: string, label?: string) =>
-    api.post(`/databases/${dbId}/backups`, { label }).then(unwrap<Backup>),
+    api.post(`/database/${dbId}/backup`, { label }).then(unwrap<Backup>),
   restore: (dbId: string, backupId: string, targetEnvironment?: string) =>
     api
-      .post(`/databases/${dbId}/backups/${backupId}/restore`, {
+      .post(`/database/${dbId}/backup/${backupId}/restore`, {
         targetEnvironment,
       })
       .then(unwrap<{ message: string }>),
@@ -137,10 +137,10 @@ export const metricsApi = {
 export const sdkApi = {
   typescript: (dbId: string) =>
     api
-      .get(`/databases/${dbId}/sdk/typescript`, { responseType: "text" })
+      .get(`/database/${dbId}/sdk/typescript`, { responseType: "text" })
       .then((r) => r.data as string),
   openapi: (dbId: string) =>
-    api.get(`/databases/${dbId}/sdk/openapi`).then(unwrap<object>),
+    api.get(`/database/${dbId}/sdk/openapi`).then(unwrap<object>),
 };
 
 // ─── Data (CRUD) ───────────────────────────────────────────
