@@ -9,7 +9,7 @@ import Header from "../components/layout/Header";
 
 const BackupsPage = () => {
   const { data: databases, isLoading } = useQuery({
-    queryKey: ["databases"],
+    queryKey: ["database"],
     queryFn: databaseApi.list,
   });
   return (

@@ -24,7 +24,7 @@ const ENGINE_OPTIONS = [
   { value: "SQLITE", label: "SQLite", desc: "Leve e embutido" },
 ];
 
-const DatabasePage: React.FC = () => {
+export function DatabasePage() {
   const qc = useQueryClient();
   const navigate = useNavigate();
   const [showCreate, setShowCreate] = useState(false);
@@ -189,7 +189,7 @@ const DatabasePage: React.FC = () => {
       )}
     </div>
   );
-};
+}
 
 function DatabaseRow({
   db,

@@ -17,10 +17,10 @@ import { cn } from "../../utils";
 
 const NAV = [
   { to: "/dashboard", icon: BarChart3, label: "Dashboard" },
-  { to: "/databases", icon: Database, label: "Databases" },
+  { to: "/database", icon: Database, label: "Databases" },
   { to: "/api-keys", icon: Key, label: "API Keys" },
-  { to: "/webhooks", icon: Webhook, label: "Webhooks" },
-  { to: "/backups", icon: HardDrive, label: "Backups" },
+  { to: "/webhook", icon: Webhook, label: "Webhooks" },
+  { to: "/backup", icon: HardDrive, label: "Backups" },
   { to: "/sdk", icon: FileCode2, label: "SDK" },
   { to: "/billing", icon: CreditCard, label: "Billing" },
   { to: "/audit", icon: ScrollText, label: "Audit Log" },

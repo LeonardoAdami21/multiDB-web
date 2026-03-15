@@ -12,8 +12,8 @@ import BackupsPage from "./pages/BackupPage";
 import SdkPage from "./pages/SdkPage";
 import BillingPage from "./pages/BillingPage";
 import AuditPage from "./pages/AuditPage";
-import DatabasePage from "./pages/DatabasePage";
 import DatabaseDetailPage from "./pages/DatabaseDetailPage";
+import DatabasePage from "./pages/DatabasePage";
 
 const qc = new QueryClient({
   defaultOptions: {
