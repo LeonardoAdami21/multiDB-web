@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { Plus, Database, Trash2, ChevronRight, RefreshCw } from "lucide-react";
@@ -24,7 +24,7 @@ const ENGINE_OPTIONS = [
   { value: "SQLITE", label: "SQLite", desc: "Leve e embutido" },
 ];
 
-const DatabasePage: React.FC = () => {
+export function DatabasePage() {
   const qc = useQueryClient();
   const navigate = useNavigate();
   const [showCreate, setShowCreate] = useState(false);
@@ -189,7 +189,7 @@ const DatabasePage: React.FC = () => {
       )}
     </div>
   );
-};
+}
 
 function DatabaseRow({
   db,
