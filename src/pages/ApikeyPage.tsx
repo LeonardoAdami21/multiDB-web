@@ -170,7 +170,7 @@ const ApiKeyPage = () => {
               </label>
               <input
                 type="date"
-                value={expiresAt}
+                value={expiresAt.toISOString().split("T")[0]}
                 onChange={(e) => setExpiresAt(new Date(e.target.value))}
                 className="px-3 py-2 rounded-md bg-elevated border border-border text-primary text-sm font-mono outline-none focus:border-accent transition-colors"
               />
